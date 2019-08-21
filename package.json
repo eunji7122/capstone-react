@@ -17,6 +17,7 @@
     "babel-preset-react-app": "^9.0.1",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "caver-js": "^1.0.1",
     "connect-privkey-to-provider": "0.0.3",
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
@@ -137,6 +138,20 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
     ]
   }
 }
