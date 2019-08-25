@@ -43,6 +43,33 @@ class HttpService {
 				return token;
 			});
 	}
+
+	register(username, password, email, phone, private_key) {
+		return axios
+			.post('/users/', {
+				username,
+				password,
+				email,
+				phone,
+				private_key,
+			})
+			.then(response => {
+				return response.data;
+			});
+	}
+
+	indexItems() {
+		return axios.get('/items/').then(response => {
+			return response.data;
+		});
+	}
+
+	getItems(itemId) {
+		return axios.get('/items/' + itemId + '/').then(response => {
+			return response.data;
+		});
+	}
+	
 }
 
 export default HttpService;
