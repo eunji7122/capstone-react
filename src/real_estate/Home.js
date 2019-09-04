@@ -4,7 +4,6 @@ import { inject } from 'mobx-react';
 
 @inject('httpService')
 class Home extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -22,6 +21,8 @@ class Home extends React.Component {
 				items,
 			});
 		});
+
+		// console.log(this.props.httpService.createItem(1, 1));
 	}
 
 	render() {

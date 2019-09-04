@@ -2,18 +2,13 @@ import { observable, action, computed } from 'mobx';
 import Caver from 'caver-js';
 
 export default class AuthStore {
-	BASE_URL = 'http://localhost:8000';
-
 	@observable authToken = null;
 
 	constructor(rootStore) {
 		this.rootStore = rootStore;
 		this.authToken = localStorage.getItem('auth_token');
 
-		const config = {
-			rpcURL: 'https://api.baobab.klaytn.net:8651',
-		};
-		this.cav = new Caver(config.rpcURL);
+		this.cav = new Caver('https://api.baobab.klaytn.net:8651');
 	}
 
 	@action setToken(token) {
@@ -41,6 +36,7 @@ export default class AuthStore {
 		return localStorage.getItem('refresh_token');
 	}
 
+	@action
 	integrateWallet = async privateKey => {
 		const walletInstance = this.cav.klay.accounts.privateKeyToAccount(
 			privateKey,

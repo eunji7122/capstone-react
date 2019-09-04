@@ -25,10 +25,8 @@ class ItemDetail extends React.Component {
 	};
 
 	purchase = () => {
-		const itemId = this.state.item.id;
-		this.props.httpService.purchaseItem(itemId).then(item => {
-			this.props.history.push('/me/items');
-		});
+		const item = this.state.item;
+		this.props.httpService.purchaseItem(item.price);
 	};
 
 	// addToCart = () => {
