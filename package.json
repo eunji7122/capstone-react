@@ -70,7 +70,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "migrate": "truffle migrate",
+    "migrate:reset": "truffle migrate --compile-all --reset"
   },
   "eslintConfig": {
     "extends": "react-app"
