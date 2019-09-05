@@ -1,16 +1,16 @@
-const PrivateKeyConnector = require('connect-privkey-to-provider')
-const NETWORK_ID = '1001'
-const GASLIMIT = '20000000'
-const URL = `https://api.baobab.klaytn.net:8651`
-const PRIVATE_KEY = '0x1204f185487d53b5af35562e1028562d365c4bd59699fe4f053addb0350c43e7' 
+const fs = require('fs');
+// const mnemonic = fs.readFileSync(".secret").toString().trim();
+
+const privateKey = fs.readFileSync(".secret").toString().trim();
+const HDWalletProvider = require("truffle-hdwallet-provider-klaytn");
 
 module.exports = {
-  networks: {  
+  networks: {
     klaytn: {
-      provider: new PrivateKeyConnector(PRIVATE_KEY, URL),
-      network_id: NETWORK_ID,
-      gas: GASLIMIT,
-      gasPrice: null,
-    }
+      provider: () => new HDWalletProvider(privateKey, "https://api.baobab.klaytn.net:8651"),
+      network_id: '1001', //Klaytn baobab testnet's network id
+      gas: '8500000',
+      gasPrice: null
+    },
   },
 }
