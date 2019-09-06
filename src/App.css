@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -31,3 +31,78 @@
     transform: rotate(360deg);
   }
 }
+
+* {box-sizing: border-box;}
+
+header {
+    background-color: #ffcccc;
+    padding: 20px 10px;
+}
+
+footer {
+    background-color: peachpuff;
+    padding: 20px 10px;
+
+}
+
+header a {
+    margin: 10px;
+    color: white;
+}
+
+.header-right {
+    float: right;
+}
+
+/* #item-list-container {
+    overflow: hidden;
+}
+
+.item-container {
+    width: 200px;
+    height: 300px;
+    background-color: #ffe6e6;
+    overflow: hidden;
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.item-container img {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    margin: 0;
+}
+
+.item-container p {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    height: 60px;
+    padding: 0 10px 10px 10px;
+    margin: 0;
+}
+
+.item-image-container {
+    height: 300px;
+    overflow: hidden;
+}
+
+.item-image-container img {
+    height: 100%;
+    width: 50%;
+    object-fit: contain;
+}
+
+.item-detail-container {
+    margin: 20px;
+}
+
+.history-container {
+  overflow: hidden;
+  border: 2px solid pink;
+  margin: 20px;
+} */

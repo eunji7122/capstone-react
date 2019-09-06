@@ -1,33 +1,37 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { inject } from 'mobx-react';
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { inject } from 'mobx-react'
 
 @inject('authStore', 'httpService')
 class ItemDetail extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			item: null,
-		};
+			isPurchased: false,
+		}
 	}
 
 	componentDidMount() {
-		this.getItem();
+		this.getItem()
 	}
 
 	getItem = () => {
-		const itemId = this.props.match.params.itemId;
+		const itemId = this.props.match.params.itemId
 		this.props.httpService.getItems(itemId).then(item => {
 			this.setState({
 				item,
-			});
-		});
-	};
+			})
+		})
+	}
 
 	purchase = () => {
-		const item = this.state.item;
-		this.props.httpService.purchaseItem(item.price);
-	};
+		const item = this.state.item
+		this.props.httpService.purchaseItem(item.price)
+		this.setState({
+			isPurchased: true,
+		})
+	}
 
 	// addToCart = () => {
 	// 	const { itemStore } = this.props;
@@ -36,10 +40,10 @@ class ItemDetail extends React.Component {
 	// };
 
 	render() {
-		const item = this.state.item;
-		const title = item ? item.title : '';
-		const desc = item ? item.description : '';
-		const image = item ? item.image : null;
+		const item = this.state.item
+		const title = item ? item.title : ''
+		const desc = item ? item.description : ''
+		const image = item ? item.image : null
 
 		return (
 			<div id="container">
@@ -51,12 +55,16 @@ class ItemDetail extends React.Component {
 						<b>{title}</b>
 					</p>
 					<p>{desc}</p>
-					<button onClick={this.purchase}>구입</button>
+					{this.state.isPurchased ? (
+						<strong>매입 중</strong>
+					) : (
+						<button onClick={this.purchase}>구입</button>
+					)}
 					<button onClick={this.addToCart}>장바구니에 담기</button>
 				</div>
 			</div>
-		);
+		)
 	}
 }
 
-export default withRouter(ItemDetail);
+export default withRouter(ItemDetail)
