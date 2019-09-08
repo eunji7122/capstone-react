@@ -44,6 +44,8 @@ class ItemDetail extends React.Component {
 		const title = item ? item.title : ''
 		const desc = item ? item.description : ''
 		const image = item ? item.image : null
+		const price = item ? item.price : ''
+		const owner = item ? item.owner.username : ''
 
 		return (
 			<div id="container">
@@ -54,7 +56,9 @@ class ItemDetail extends React.Component {
 					<p>
 						<b>{title}</b>
 					</p>
-					<p>{desc}</p>
+					<p>설명: {desc}</p>
+					<p>집주인: {owner}</p>
+					<p>{price} KLAY</p>
 					{this.state.isPurchased ? (
 						<strong>매입 중</strong>
 					) : (

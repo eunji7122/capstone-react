@@ -29,16 +29,16 @@ contract RealEstateContract {
     } 
 
     // function buyRealEstate(int _id) public payable {
-    //     require(realEstates[_id].id != 0);
+    //     require(realEstates[_id].id != 0); 
     //     RealEstate memory realEstate = realEstates[_id];
     //     require(realEstate.price <= msg.value);
     //     realEstate.owner.transfer(msg.value);
     //     realEstates[_id] = RealEstate(realEstate.id, realEstate.price, msg.sender);
     // }
 
-    function transfer(uint _value) public returns (bool) {
-        require(getBalance() >= _value);
-        msg.sender.transfer(_value);
+    function transfer(uint _value, address payable owner) public returns (bool) {
+        // require(getBalance() >= _value);
+        owner.transfer(_value);
         return true;
     }
 

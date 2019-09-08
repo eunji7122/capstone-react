@@ -6,6 +6,7 @@ import Login from './real_estate/Login';
 import Register from './real_estate/Register';
 import ItemDetail from './real_estate/ItemDetail';
 import Header from './real_estate/Header';
+import MyItems from './real_estate/MyItems';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/register" component={Register} />
 				<Route exact path="/items/:itemId" component={ItemDetail} />
+				<Route exact path="/me/items" component={MyItems} />
 			</Switch>
 		</div>
   )

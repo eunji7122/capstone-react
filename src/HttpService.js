@@ -27,11 +27,13 @@ class HttpService {
 		)
 
 		const walletFromSession = sessionStorage.getItem('walletInstance')
-		cav.klay.accounts.wallet.add(JSON.parse(walletFromSession))
+		if (walletFromSession) {
+			cav.klay.accounts.wallet.add(JSON.parse(walletFromSession))
+		}
 	}
 
 	getMe() {
-		return axios.get('/me/').then(response => {
+		return axios.get('/me/privateKey/').then(response => {
 			return response.data
 		})
 	}
@@ -82,6 +84,7 @@ class HttpService {
 		const loginAddress = JSON.parse(sessionStorage.getItem('walletInstance'))
 		console.log(loginAddress)
 		console.log(loginAddress.address)
+		
 
 		this.contract.methods
 			.deposit()
@@ -103,6 +106,7 @@ class HttpService {
 		return
 	}
 
+
 	createItem(itemId, price) {
 		this.contract.methods
 			.createRealEstate(itemId, price)
@@ -110,6 +114,12 @@ class HttpService {
 			.then(result => {
 				return result
 			})
+	}
+
+	indexMyItems() {
+		return axios.get('/me/items/').then(response => {
+			return response.data
+		})
 	}
 }
 
