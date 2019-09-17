@@ -27,7 +27,6 @@ class Login extends React.Component {
 
 	login = () => {
 		this.props.httpService.login(this.state.username, this.state.password).then(token => {
-			console.log('login')
 			this.props.history.push('/')
 		})
 	}
@@ -59,6 +58,9 @@ class Login extends React.Component {
 							<button onClick={this.login}>로그인</button>
 							<p className="message">
 								Not registered? <a href="/register">Create an account</a>
+							</p>
+							<p className="message">
+								<a href="https://baobab.wallet.klaytn.com/">Klaytn Wallet</a>
 							</p>
 						</div>
 					</div>

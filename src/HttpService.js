@@ -29,6 +29,8 @@ class HttpService {
 		const walletFromSession = sessionStorage.getItem('walletInstance')
 		if (walletFromSession) {
 			cav.klay.accounts.wallet.add(JSON.parse(walletFromSession))
+			console.log('내 계정 주소: ' + walletFromSession)
+			console.log('Contract 주소: ' + ContractAddress.address)
 		}
 	}
 
@@ -84,7 +86,6 @@ class HttpService {
 		const loginAddress = JSON.parse(sessionStorage.getItem('walletInstance'))
 		console.log(loginAddress)
 		console.log(loginAddress.address)
-		
 
 		this.contract.methods
 			.deposit()
@@ -106,6 +107,47 @@ class HttpService {
 		return
 	}
 
+	sendKlay(price, owner) {
+		const cav = new Caver('https://api.baobab.klaytn.net:8651')
+		console.log('금액: ' + price)
+		console.log('owner 주소: ' + owner)
+		console.log('컨트랙 주소: ' + ContractAddress.address)
+
+		// const senderTransaction = {
+		// 	type: 'VALUE_TRANSFER',
+		// 	from: ContractAddress.address,
+		// 	to: owner,
+		// 	gas: '250000',
+		// 	value: cav.utils.toPeb(price, 'KLAY'),
+		// }
+
+		// cav.klay
+		// 	.sendTransaction(senderTransaction)
+		// 	.on('transactionHash', txHash => {
+		// 		console.log(`txHash: ${txHash}`)
+		// 	})
+		// 	.on('receipt', receipt => {
+		// 		console.log(`(#${receipt.blockNumber})`, receipt)
+		// 		alert(price + ' KLAY를' + owner + '에게 송금했습니다.')
+		// 	})
+		// 	.on('error', error => {
+		// 		console.log(error.message)
+		// 	})
+
+		this.contract.methods
+			.transfer(cav.utils.toPeb(price, 'KLAY'), owner)
+			.send({
+				from: owner,
+				gas: '250000',
+			})
+			.then(function(receipt) {
+				if (receipt.status) {
+					alert(price + 'KLAY가 owner 계정으로 지급되었습니다.')
+				}
+			})
+
+		return
+	}
 
 	createItem(itemId, price) {
 		this.contract.methods
@@ -121,6 +163,20 @@ class HttpService {
 			return response.data
 		})
 	}
+
+	registerItem(title, description, price, image) {
+		return axios
+			.post('/items/', {
+				title,
+				description,
+				price,
+				image,
+			})
+			.then(response => {
+				return response.data
+			})
+	}
 }
+
 
 export default HttpService

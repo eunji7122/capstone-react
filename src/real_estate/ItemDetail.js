@@ -33,6 +33,12 @@ class ItemDetail extends React.Component {
 		})
 	}
 
+	sendToOwner = () => {
+		const item = this.state.item
+		const ownerAddress = item ? item.owner.address : ''
+		this.props.httpService.sendKlay(item.price, ownerAddress)
+	}
+
 	// addToCart = () => {
 	// 	const { itemStore } = this.props;
 	// 	const item = this.state.item;
@@ -64,7 +70,7 @@ class ItemDetail extends React.Component {
 					) : (
 						<button onClick={this.purchase}>구입</button>
 					)}
-					<button onClick={this.addToCart}>장바구니에 담기</button>
+					<button onClick={this.sendToOwner}>입금</button>
 				</div>
 			</div>
 		)
