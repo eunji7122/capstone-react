@@ -15,10 +15,6 @@ export default class AuthStore {
 		this.authToken = token.token_type + ' ' + token.access_token
 		localStorage.setItem('auth_token', this.authToken)
 		localStorage.setItem('refresh_token', token.refresh_token)
-
-		this.rootStore.httpService.getMe().then(me => {
-			this.integrateWallet(me.private_key)
-		})
 	}
 
 	@action deleteToken() {
@@ -35,6 +31,10 @@ export default class AuthStore {
 
 	get refreshToken() {
 		return localStorage.getItem('refresh_token')
+	}
+
+	setPrivateKey(privateKey) {
+		this.integrateWallet(privateKey)
 	}
 
 	@action

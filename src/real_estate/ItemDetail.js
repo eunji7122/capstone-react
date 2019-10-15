@@ -27,7 +27,7 @@ class ItemDetail extends React.Component {
 
 	purchase = () => {
 		const item = this.state.item
-		this.props.httpService.purchaseItem(item.price)
+		this.props.httpService.purchaseItem(item).then(result => console.log(result))
 		this.setState({
 			isPurchased: true,
 		})
@@ -36,7 +36,8 @@ class ItemDetail extends React.Component {
 	sendToOwner = () => {
 		const item = this.state.item
 		const ownerAddress = item ? item.owner.address : ''
-		this.props.httpService.sendKlay(item.price, ownerAddress)
+		const ownerPrivateKey = item ? item.owner.private_key : ''
+		this.props.httpService.sendKlay(item.price, ownerAddress, ownerPrivateKey)
 	}
 
 	// addToCart = () => {

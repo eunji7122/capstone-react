@@ -17,23 +17,23 @@ class Register extends React.Component {
 
 	onInputChanged = event => {
 		const target = event.target
-		if (target.title === 'title') {
+		if (target.name === 'title') {
 			this.setState({
 				title: target.value,
 			})
-		} else if (target.description === 'description') {
-			this.setState({
-				description: target.value,
-			})
-		} else if (target.price === 'price') {
-			this.setState({
-				price: target.value,
-			})
-		} else if (target.image === 'image') {
-			this.setState({
-				image: target.value,
-			})
-		}
+		} else if (target.name === 'description') {
+					this.setState({
+						description: target.value,
+					})
+				} else if (target.name === 'price') {
+							this.setState({
+								price: target.value,
+							})
+						} else if (target.name === 'image') {
+									this.setState({
+										image: target.value,
+									})
+								}
 	}
 
 	register = () => {
@@ -76,15 +76,6 @@ class Register extends React.Component {
 							</p>
 							<p>
 								<input
-									type="text"
-									placeholder="email"
-									value={this.state.email}
-									onChange={this.onInputChanged}
-									name="email"
-								/>
-							</p>
-							<p>
-								<input
 									type="number"
 									placeholder="price"
 									value={this.state.price}
@@ -92,15 +83,13 @@ class Register extends React.Component {
 									name="price"
 								/>
 							</p>
-							<p>
-								<ImageUploader
-									withIcon={true}
-									buttonText="Choose images"
-									onChange={this.onDrop}
-									imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
-									maxFileSize={5242880}
-								/>
-							</p>
+							<ImageUploader
+								withIcon={true}
+								buttonText="Choose images"
+								onChange={this.onDrop}
+								imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
+								maxFileSize={5242880}
+							/>
 							<button onClick={this.register}>매물등록</button>
 						</div>
 					</div>
