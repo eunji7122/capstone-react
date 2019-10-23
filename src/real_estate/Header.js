@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
-import '../bootstrap.min.css'
-import '../heroic-features.css'
+import '../vendor/bootstrap/css/bootstrap.min.css'
+import '../css/heroic-features.css'
 
 @inject('httpService', 'authStore', 'history')
 @observer
@@ -56,18 +56,28 @@ class Header extends React.Component {
 		// })
 
 		return (
-			<header>
+			<div>
 				<nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 					<div className="container">
 						<Link className="navbar-brand" to="/">
 							Klaytn 부동산 거래소
 						</Link>
+						<button
+							className="navbar-toggler"
+							type="button"
+							data-toggle="collapse"
+							data-target="#navbarResponsive"
+							aria-controls="navbarResponsive"
+							aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span className="navbar-toggler-icon"></span>
+						</button>
 						<div className="collapse navbar-collapse" id="navbarResponsive">
 							<ul className="navbar-nav ml-auto">
 								<li className="nav-item active">
 									<Link className="nav-link" to="/">
 										Home
-										<span class="sr-only">(current)</span>
+										<span className="sr-only">(current)</span>
 									</Link>
 								</li>
 								<li className="nav-item">
@@ -128,7 +138,7 @@ class Header extends React.Component {
 						<Link to="/login">Login</Link>
 					)}
 				</div> */}
-			</header>
+			</div>
 		)
 	}
 }

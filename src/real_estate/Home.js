@@ -40,10 +40,21 @@ class Home extends React.Component {
 			return <ItemBox key={item.id} item={item} />
 		})
 		return (
-			<div id="container">
+			<div className="container">
 				<button onClick={this.createItem}>CreateItem</button>
 				<button onClick={this.getItem}>GetOwner</button>
-				<div id="item-list-container">{items}</div>
+				<header className="jumbotron my-4">
+					<h1 className="display-3">Welcome!</h1>
+					<p className="lead">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam,
+						eligendi, in quo sunt possimus non incidunt odit vero aliquid similique
+						quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.
+					</p>
+					<a href="#" className="btn btn-primary btn-lg">
+						Detail BlockChain
+					</a>
+				</header>
+				<div className="row text-center">{items}</div>
 			</div>
 		)
 	}
