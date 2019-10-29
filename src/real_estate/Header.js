@@ -56,7 +56,7 @@ class Header extends React.Component {
 		// })
 
 		return (
-			<div>
+			<div className="header-container">
 				<nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 					<div className="container">
 						<Link className="navbar-brand" to="/">
@@ -84,6 +84,13 @@ class Header extends React.Component {
 									<Link className="nav-link" to="#">
 										About
 									</Link>
+								</li>
+								<li className="nav-item">
+									{authStore.isLoggedIn ? (
+										<Link className="nav-link" to="/registerItem">
+											Register Item
+										</Link>
+									) : null}
 								</li>
 								<li className="nav-item">
 									{authStore.isLoggedIn ? (

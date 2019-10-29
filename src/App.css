@@ -44,6 +44,10 @@ footer {
 
 }
 
+.header-container {
+  height: 80px;
+}
+
 header a {
     margin: 10px;
     color: white;

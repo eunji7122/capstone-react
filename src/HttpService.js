@@ -158,14 +158,12 @@ class HttpService {
 		})
 	}
 
-	registerItem(title, description, price, image) {
+	registerItem(formData) {
 		return axios
-			.post('/items/', {
-				title,
-				description,
-				price,
-				image,
-			})
+			.post('/items/', formData, {
+				headers: {
+      				'Content-Type': 'multipart/form-data'
+			}})
 			.then(response => {
 				return response.data
 			})

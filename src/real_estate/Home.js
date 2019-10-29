@@ -1,6 +1,8 @@
 import React from 'react'
 import ItemBox from './ItemBox'
 import { inject } from 'mobx-react'
+import '../vendor/bootstrap/css/bootstrap.min.css'
+import '../css/heroic-features.css'
 
 @inject('httpService')
 class Home extends React.Component {
@@ -41,8 +43,10 @@ class Home extends React.Component {
 		})
 		return (
 			<div className="container">
-				<button onClick={this.createItem}>CreateItem</button>
-				<button onClick={this.getItem}>GetOwner</button>
+				<div className="divex">
+					<button onClick={this.createItem}>CreateItem</button>
+					<button onClick={this.getItem}>GetOwner</button>
+				</div>
 				<header className="jumbotron my-4">
 					<h1 className="display-3">Welcome!</h1>
 					<p className="lead">
