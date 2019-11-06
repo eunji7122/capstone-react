@@ -6,6 +6,7 @@ import '../plugins/bootstrap/bootstrap.min.css'
 import '../plugins/themefisher-fonts/themefisher-fonts.css'
 import '../plugins/owl-carousel/owl.carousel.css'
 import '../plugins/magnific-popup/magnific-popup.css'
+import Modal from './SMSModal'
 
 @inject('authStore', 'httpService')
 class ItemDetail extends React.Component {
@@ -16,6 +17,7 @@ class ItemDetail extends React.Component {
 			isPurchased: false,
 			user: null,
 			auth_number: '',
+			isModalOpen: false,
 		}
 	}
 
@@ -57,7 +59,33 @@ class ItemDetail extends React.Component {
 		const user = this.state.user
 		const user_phone = user.phone
 
-		this.props.httpService.smsService(user_phone).then(result => {})
+		this.props.httpService.smsService(user_phone).then(result => {
+			alert("문자를 전송하였습니다.")
+		})
+	}
+
+	smsAuth = () => {
+		const user = this.state.user
+		const user_phone = user.phone
+		const item = this.state.item
+		this.setState({ isModalOpen: false })
+
+
+		this.props.httpService.smsAuth(user_phone, this.state.auth_number).then(response => {
+			console.log(response.result)
+			if (response.result == true){
+				alert('인증에 성공하였습니다. 잠시 후 구매가 완료됩니다.')
+				this.props.httpService.purchaseItem(item).then(result => {
+					console.log(result)
+				})
+				this.setState({
+					isPurchased: true,
+				})
+				this.props.history.push('/')
+			} else {
+				alert("인증에 실패하였습니다.")
+			}
+		})
 	}
 
 	onInputChanged = event => {
@@ -69,11 +97,20 @@ class ItemDetail extends React.Component {
 		}
 	}
 
-	sendToOwner = () => {
-		const item = this.state.item
-		const ownerAddress = item ? item.owner.address : ''
-		const ownerPrivateKey = item ? item.owner.private_key : ''
-		this.props.httpService.sendKlay(item.price, ownerAddress, ownerPrivateKey)
+	// sendToOwner = () => {
+	// 	const item = this.state.item
+	// 	const ownerAddress = item ? item.owner.address : ''
+	// 	const ownerPrivateKey = item ? item.owner.private_key : ''
+	// 	this.props.httpService.sendKlay(item.price, ownerAddress, ownerPrivateKey)
+	// }
+
+	openModal = () => {
+		this.setState({ isModalOpen: true })
+	}
+
+	closeModal = () => {
+
+		this.setState({ isModalOpen: false })
 	}
 
 	render() {
@@ -98,31 +135,20 @@ class ItemDetail extends React.Component {
 									<p className="mb-4">설명: {desc}</p>
 									<p className="mb-4">집주인: {owner}</p>
 									<p className="mb-4">{price} KLAY</p>
-									<button className="btn2 btn-main2" onClick={this.purchase}>
+									<button className="btn2 btn-main2" onClick={this.openModal}>
 										Purchase
 									</button>
+									<Modal
+										isOpen={this.state.isModalOpen}
+										close={this.smsAuth}
+										onInputChanged={this.onInputChanged}
+										smsToUser={this.smsToUser}>
+									</Modal>
 								</div>
 							</div>
 						</div>
 					</div>
 				</section>
-				{/* <div className="item-image-container">
-					<img src={image} alt="" />
-				</div>
-				<div className="item-detail-container">
-					<p>
-						<b>{title}</b>
-					</p>
-					<p>설명: {desc}</p>
-					<p>집주인: {owner}</p>
-					<p>{price} KLAY</p>
-					{this.state.isPurchased ? (
-						<strong>매입 중</strong>
-					) : (
-						<button onClick={this.purchase}>구입</button>
-					)}
-					<button onClick={this.sendToOwner}>입금</button>
-				</div> */}
 			</div>
 		)
 	}
