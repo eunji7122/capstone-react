@@ -35,6 +35,13 @@ class HttpService {
 	}
 
 	getMe() {
+		return axios.get('/me/')
+			.then(response => {
+				return response.data
+			})
+	}
+
+	getPrivateKey() {
 		return axios.get('/me/privateKey/').then(response => {
 			return response.data
 		})
@@ -167,6 +174,30 @@ class HttpService {
 			.then(response => {
 				return response.data
 			})
+	}
+
+	smsService(phone) {
+		return axios
+			.post('/api/auth/', {
+				phone,
+			})
+			.then(response => {
+				return response.data
+			})
+	}
+
+	smsAuth(phone, auth_number) {
+		return axios
+			.get('/api/auth/', {
+				params: {
+					phone: phone,
+					auth_number: auth_number,
+				},
+			})
+			.then(response => {
+				return response.data
+			})
+
 	}
 }
 

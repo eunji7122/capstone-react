@@ -35,7 +35,7 @@ class Login extends React.Component {
 	login = () => {
 		this.props.httpService.login(this.state.username, this.state.password).then(token => {
 			this.props.history.push('/')
-			this.props.httpService.getMe().then(me => {
+			this.props.httpService.getPrivateKey().then(me => {
 				this.props.authStore.setPrivateKey(me.private_key)
 			})
 		})

@@ -14,11 +14,22 @@ class ItemDetail extends React.Component {
 		this.state = {
 			item: null,
 			isPurchased: false,
+			user: null,
+			auth_number: '',
 		}
 	}
 
 	componentDidMount() {
 		this.getItem()
+		this.getMe()
+	}
+
+	getMe = () => {
+		this.props.httpService.getMe().then(user => {
+			this.setState({
+				user,
+			})
+		})
 	}
 
 	getItem = () => {
@@ -32,10 +43,30 @@ class ItemDetail extends React.Component {
 
 	purchase = () => {
 		const item = this.state.item
-		this.props.httpService.purchaseItem(item).then(result => console.log(result))
+
+		this.props.httpService.purchaseItem(item).then(result => {
+			alert('구입을 완료했습니다.')
+			console.log(result)
+		})
 		this.setState({
 			isPurchased: true,
 		})
+	}
+
+	smsToUser = () => {
+		const user = this.state.user
+		const user_phone = user.phone
+
+		this.props.httpService.smsService(user_phone).then(result => {})
+	}
+
+	onInputChanged = event => {
+		const target = event.target
+		if (target.name === 'auth_number') {
+			this.setState({
+				auth_number: target.value,
+			})
+		}
 	}
 
 	sendToOwner = () => {
@@ -44,12 +75,6 @@ class ItemDetail extends React.Component {
 		const ownerPrivateKey = item ? item.owner.private_key : ''
 		this.props.httpService.sendKlay(item.price, ownerAddress, ownerPrivateKey)
 	}
-
-	// addToCart = () => {
-	// 	const { itemStore } = this.props;
-	// 	const item = this.state.item;
-	// 	itemStore.addItemToCart(item);
-	// };
 
 	render() {
 		const item = this.state.item

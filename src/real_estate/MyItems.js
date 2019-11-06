@@ -13,12 +13,12 @@ class MyItems extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getMe()
+		this.getPrivateKey()
 		this.indexMyItems()
 	}
 
-	getMe = () => {
-		this.props.httpService.getMe().then(user => {
+	getPrivateKey = () => {
+		this.props.httpService.getPrivateKey().then(user => {
 			this.setState({
 				user,
 			})
