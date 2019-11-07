@@ -60,7 +60,7 @@ class ItemDetail extends React.Component {
 		const user_phone = user.phone
 
 		this.props.httpService.smsService(user_phone).then(result => {
-			alert("문자를 전송하였습니다.")
+			alert('문자를 전송하였습니다.')
 		})
 	}
 
@@ -70,10 +70,9 @@ class ItemDetail extends React.Component {
 		const item = this.state.item
 		this.setState({ isModalOpen: false })
 
-
 		this.props.httpService.smsAuth(user_phone, this.state.auth_number).then(response => {
 			console.log(response.result)
-			if (response.result == true){
+			if (response.result == true) {
 				alert('인증에 성공하였습니다. 잠시 후 구매가 완료됩니다.')
 				this.props.httpService.purchaseItem(item).then(result => {
 					console.log(result)
@@ -83,7 +82,7 @@ class ItemDetail extends React.Component {
 				})
 				this.props.history.push('/')
 			} else {
-				alert("인증에 실패하였습니다.")
+				alert('인증에 실패하였습니다.')
 			}
 		})
 	}
@@ -108,9 +107,20 @@ class ItemDetail extends React.Component {
 		this.setState({ isModalOpen: true })
 	}
 
-	closeModal = () => {
+	// closeModal = () => {
 
-		this.setState({ isModalOpen: false })
+	// 	this.setState({ isModalOpen: false })
+	// }
+
+	createItem = () => {
+		const item = this.state.item
+		const itemId = item ? item.id : ''
+		const price = item ? item.price : ''
+
+		this.props.httpService.createItem(itemId, price * 1000).then(result => {
+			console.log(result)
+			alert('임대인이 등록되었습니다.')
+		})
 	}
 
 	render() {
@@ -123,6 +133,9 @@ class ItemDetail extends React.Component {
 
 		return (
 			<div>
+				<div className="divex">
+					<button onClick={this.createItem}>임대인등록</button>
+				</div>
 				<section className="section">
 					<div className="container">
 						<div className="row">
@@ -142,8 +155,7 @@ class ItemDetail extends React.Component {
 										isOpen={this.state.isModalOpen}
 										close={this.smsAuth}
 										onInputChanged={this.onInputChanged}
-										smsToUser={this.smsToUser}>
-									</Modal>
+										smsToUser={this.smsToUser}></Modal>
 								</div>
 							</div>
 						</div>

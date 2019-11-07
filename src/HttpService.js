@@ -103,49 +103,49 @@ class HttpService {
 		)
 	}
 
-	sendKlay(price, owner, ownerPrivateKey) {
-		const cav = new Caver('https://api.baobab.klaytn.net:8651')
-		console.log('집주인 privatekey: ' + ownerPrivateKey)
-		console.log('집주인 address: ' + owner)
+	// sendKlay(price, owner, ownerPrivateKey) {
+	// 	const cav = new Caver('https://api.baobab.klaytn.net:8651')
+	// 	console.log('집주인 privatekey: ' + ownerPrivateKey)
+	// 	console.log('집주인 address: ' + owner)
 
-		console.log('owner 주소: ' + owner)
-		console.log('컨트랙 주소: ' + ContractAddress.address)
+	// 	console.log('owner 주소: ' + owner)
+	// 	console.log('컨트랙 주소: ' + ContractAddress.address)
 
-		// const senderTransaction = {
-		// 	type: 'VALUE_TRANSFER',
-		// 	from: ContractAddress.address,
-		// 	to: owner,
-		// 	gas: '250000',
-		// 	value: cav.utils.toPeb(price, 'KLAY'),
-		// }
+	// 	// const senderTransaction = {
+	// 	// 	type: 'VALUE_TRANSFER',
+	// 	// 	from: ContractAddress.address,
+	// 	// 	to: owner,
+	// 	// 	gas: '250000',
+	// 	// 	value: cav.utils.toPeb(price, 'KLAY'),
+	// 	// }
 
-		// cav.klay
-		// 	.sendTransaction(senderTransaction)
-		// 	.on('transactionHash', txHash => {
-		// 		console.log(`txHash: ${txHash}`)
-		// 	})
-		// 	.on('receipt', receipt => {
-		// 		console.log(`(#${receipt.blockNumber})`, receipt)
-		// 		alert(price + ' KLAY를' + owner + '에게 송금했습니다.')
-		// 	})
-		// 	.on('error', error => {
-		// 		console.log(error.message)
-		// 	})
+	// 	// cav.klay
+	// 	// 	.sendTransaction(senderTransaction)
+	// 	// 	.on('transactionHash', txHash => {
+	// 	// 		console.log(`txHash: ${txHash}`)
+	// 	// 	})
+	// 	// 	.on('receipt', receipt => {
+	// 	// 		console.log(`(#${receipt.blockNumber})`, receipt)
+	// 	// 		alert(price + ' KLAY를' + owner + '에게 송금했습니다.')
+	// 	// 	})
+	// 	// 	.on('error', error => {
+	// 	// 		console.log(error.message)
+	// 	// 	})
 
-		this.contract.methods
-			.transfer(cav.utils.toPeb(price, 'KLAY'), owner)
-			.send({
-				from: owner,
-				gas: '250000',
-			})
-			.then(function(receipt) {
-				if (receipt.status) {
-					alert(price + 'KLAY가 [' + owner + '] 계정으로 지급되었습니다.')
-				}
-			})
+	// 	this.contract.methods
+	// 		.transfer(cav.utils.toPeb(price, 'KLAY'), owner)
+	// 		.send({
+	// 			from: owner,
+	// 			gas: '250000',
+	// 		})
+	// 		.then(function(receipt) {
+	// 			if (receipt.status) {
+	// 				alert(price + 'KLAY가 [' + owner + '] 계정으로 지급되었습니다.')
+	// 			}
+	// 		})
 
-		return
-	}
+	// 	return
+	// }
 
 	createItem(itemId, price) {
 		const loginAddress = JSON.parse(sessionStorage.getItem('walletInstance'))

@@ -30,6 +30,7 @@ class Header extends React.Component {
 	logout = () => {
 		const { authStore } = this.props
 		authStore.deleteToken()
+		this.props.history.push('/')
 	}
 
 	// onInputChanged = event => {
