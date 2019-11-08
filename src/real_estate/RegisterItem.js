@@ -45,9 +45,13 @@ class Register extends React.Component {
 		formData.append('price', this.state.price)
 		formData.append('image', this.state.image)
 
-		this.props.httpService.registerItem(formData).then(response => {
-			alert('매물이 등록되었습니다.')
-			this.props.history.push('/')
+		this.props.httpService.registerItem(formData).then(item => {
+			console.log(item)
+			this.props.httpService.createItem(item.id, item.price * 1000).then(result => {
+				console.log(result)
+				alert('매물이 등록되었습니다.')
+				this.props.history.push('/')
+			})
 		})
 	}
 
