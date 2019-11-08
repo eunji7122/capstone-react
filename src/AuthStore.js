@@ -1,5 +1,4 @@
 import { observable, action, computed } from 'mobx'
-import Caver from 'caver-js'
 
 export default class AuthStore {
 	@observable authToken = null
@@ -8,7 +7,7 @@ export default class AuthStore {
 		this.rootStore = rootStore
 		this.authToken = localStorage.getItem('auth_token')
 
-		this.cav = new Caver('https://api.baobab.klaytn.net:8651')
+		this.cav = rootStore.cav
 	}
 
 	@action setToken(token) {

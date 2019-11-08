@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { reaction } from 'mobx'
-import Caver from 'caver-js'
 import ContractAddress from './deployedAddress.json'
 import ContractABI from './deployedABI.json'
 
@@ -9,7 +8,7 @@ class HttpService {
 		this.rootStore = rootStore
 		this.authStore = rootStore.authStore
 
-		this.cav = new Caver('https://api.baobab.klaytn.net:8651')
+		this.cav = rootStore.cav
 		this.contract = new this.cav.klay.Contract(ContractABI, ContractAddress.address)
 
 		this.clientID = 'Lrisd2wLpebx5ITLwBGYrVzHNTSbcUYeMVYNRyue'
@@ -35,10 +34,9 @@ class HttpService {
 	}
 
 	getMe() {
-		return axios.get('/me/')
-			.then(response => {
-				return response.data
-			})
+		return axios.get('/me/').then(response => {
+			return response.data
+		})
 	}
 
 	getPrivateKey() {
@@ -169,8 +167,9 @@ class HttpService {
 		return axios
 			.post('/items/', formData, {
 				headers: {
-      				'Content-Type': 'multipart/form-data'
-			}})
+					'Content-Type': 'multipart/form-data',
+				},
+			})
 			.then(response => {
 				return response.data
 			})
@@ -197,7 +196,6 @@ class HttpService {
 			.then(response => {
 				return response.data
 			})
-
 	}
 }
 
