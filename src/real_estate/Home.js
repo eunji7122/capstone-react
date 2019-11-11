@@ -61,11 +61,10 @@ class Home extends React.Component {
 					<button onClick={this.getItem}>GetOwner</button>
 				</div> */}
 				<header className="jumbotron my-4">
-					<h1 className="display-3">Welcome!</h1>
+					<h1 className="display-3">Klaytn 부동산 거래 시스템</h1>
 					<p className="lead">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam,
-						eligendi, in quo sunt possimus non incidunt odit vero aliquid similique
-						quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.
+						부동산 거래 과정에서 종이로 된 증명서는 위조 / 변조에 쉽게 노출되어 부동산 범죄에 악용되는 사례가 다수 발생한다.
+						이 문제점을 보완하게 위해 블록체인 기술을 활용하여 데이터 형식의 부동산 거래를 하는 시스템을 개발한다.
 					</p>
 					<p className="lead">
 						[내 계정 주소] {userAddress}

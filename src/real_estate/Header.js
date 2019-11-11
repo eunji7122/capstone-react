@@ -95,9 +95,7 @@ class Header extends React.Component {
 								</li>
 								<li className="nav-item">
 									{authStore.isLoggedIn ? (
-										<Link className="nav-link" to="/me/items">
-											MyItems
-										</Link>
+										null
 									) : (
 										<Link className="nav-link" to="/register">
 											Register
